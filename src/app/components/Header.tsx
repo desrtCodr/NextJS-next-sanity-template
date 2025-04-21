@@ -1,8 +1,11 @@
-export default function Header() {
-  return (
-    <header className="bg-black text-white p-4">
-      <h1 className="text-2xl font-bold">Next JS Sanity Sandbox</h1>
-      <p className="text-sm">A Sandbox for Next JS with Sanity</p>
-    </header>
-  )
+import { groq } from 'next-sanity'
+import HeaderClient from './HeaderClient'
+import { client } from '@/sanity/client'
+
+export const MENU_ITEMS_QUERY = groq`*[_type == "menuItem"]`
+
+export default async function Header() {
+  const options = { next: { revalidate: 0 } }
+  const menuList = await client.fetch(MENU_ITEMS_QUERY, {}, options)
+  return <HeaderClient menuList={menuList} />
 }

@@ -1,17 +1,19 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Saira_Condensed, Gothic_A1 } from 'next/font/google'
 import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import SideBar from './components/SideBar'
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+
+const sairaCondensed = Saira_Condensed({
+  variable: '--font-saira-condensed',
   subsets: ['latin'],
+  weight: ['400'],
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const gothicA1 = Gothic_A1({
+  variable: '--font-gothic-a1',
   subsets: ['latin'],
+  weight: ['400'],
 })
 
 export const metadata: Metadata = {
@@ -27,13 +29,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${sairaCondensed.variable} ${gothicA1.variable} ${sairaCondensed.className} ${gothicA1.className} antialiased`}
       >
         <Header />
-        <div className="flex">
-          <SideBar />
-          {children}
-        </div>
+        <div className="flex">{children}</div>
         <Footer />
       </body>
     </html>
